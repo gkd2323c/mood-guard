@@ -1,0 +1,37 @@
+{
+  "manifestVersion": 2,
+  "id": "mood-guard",
+  "name": "思考块守卫",
+  "description": "回复开头的思考块缺失时，在用户下一条消息发出后向模型注入一条隐身提示：覆盖 MOOD / PULSE / 沉思三种模块，无思考模块的 agent 不判定。不新起回合、不进对话记录、不改用户消息。",
+  "version": "0.3.0",
+  "entry": "index.js",
+  "icon": "assets/icon.svg",
+  "minAppVersion": "1.1.7-beta",
+  "capabilities": [
+    "app/hooks.observe",
+    "app/hooks.agent-before-start",
+    "app/sessions.read"
+  ],
+  "contributes": {
+    "settings": {
+      "title": "思考块守卫",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "title": "启用守卫",
+            "description": "总开关。关闭后不再判定，也不再注入提示。",
+            "default": true
+          },
+          "reminderText": {
+            "type": "string",
+            "title": "提示文案",
+            "description": "注入给模型的文本。留空按当前会话的思考块自动生成。",
+            "default": ""
+          }
+        }
+      }
+    }
+  }
+}
